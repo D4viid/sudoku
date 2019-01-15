@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sudoku</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 50px;
+    }
+
+    #content {
+      position: relative;
+    }
+
+    #sudoku, #nav {
+      width: 1080px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      margin: 0 auto;
+      border: 2px solid rgb(238, 238, 238, 1);
+    }
+
+    .grid__cell, input {
+      height: 40px;
+      width: 40px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+      margin: 0;
+    }
+
+    #nav {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .btn {
+      padding: 10px 25px;
+      color: white;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: green;
+    }
+
+    .btn-secondary {
+      background: orange;
+    }
+
+    .btn-warning {
+      background: red;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="content">
+    <form id="sudoku">
+      <h1>Sudoku</h1>
+      <table class="grid" cellspacing="0" cellpadding="0">   
+        <tbody>
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" value="8" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonlyreadonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number"value="2" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" value="5" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="5"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="9"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" value="6" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="8"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="3"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="4"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="5"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="9"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+          </tr>
+
+          <tr class="grid__row">
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="2"></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly></td>
+            <td class="grid__cell"><input min="1" max="9" type="number" readonly value="7"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="nav">
+        <button type="button" id="solve" class="btn btn-primary">Solve</button>
+        <button type="button" id="erase" class="btn btn-secondary">Erase</button>
+        <button type="button" id="reset" class="btn btn-warning">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
