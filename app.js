@@ -1,54 +1,3 @@
- /* function solve(matrix) {
-  var i, j, b, k;
-  for (i = 0; i <= 2; i++) {
-    for (j = 0; j <= 2; j++) {
-      //check for legitimate values
-      if (!matrix[i][j]) {
-        for (k = 1; k <= 3; k++) {
-          if (check(matrix, i, j, k)) {
-            matrix[i][j] = k;
-            b = solve(matrix);
-            if (b) { return true; }
-            matrix[i][j] = 0;
-          }
-        }
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-function insert(matrix, i, j, k) {
-  //check column and rows
-  var a, b;
-
-  // rows
-  for (a = 0; a <= 2; a++) {
-    if (a != i && matrix[a][j] == k) {
-      return false;
-    }
-  }
-
-  //column
-  for (a = 0; a <= 2; a++) {
-    if (a != j && matrix[i][a] == k) {
-      return false;
-    }
-  }
-  //check the 3 by 3 squares
-  /* var y = Math.floor((i / 3)) * 3,
-      x = Math.floor((j / 3)) * 3;
-  for (a = 0; a < 3; a++) {
-    for (b = 0; b < 3; b++) {
-      if (a != i && b != j && matrix[y + a][x + b] == k) {
-        return false;
-      }
-    }
-  } */
- //  return true;
-// }
-
 let grid;
 const form = document.querySelector('#sudoku');
 const table = form.querySelector('.grid');
@@ -59,44 +8,15 @@ const table = form.querySelector('.grid');
 function check(grid, row, col, num) {
   var i;
 
-  for (i = 0; i <= 2; i++) {
+  for (i = 0; i <= 8; i++) {
     if (i != row && grid[i][col] == num) {
       return false;
     }
   }
 
-  for (i = 0; i <= 2; i++) {
+  for (i = 0; i <= 8; i++) {
    if (i != col && grid[row][i] == num) {
       return false;
-    }
-  }
-
-  return true;
-}
-
-function sweep2(grid) {
-  // parse each row of the grid
-  for (row = 0; row <= 2; row++) {
-    // parse each column of the grid
-    for (col = 0; col <= 2; col++) {
-    console.log('SWEEP 2 !!!!', row, col);
-      // empty string spotted
-      if (!grid[row][col]) {
-         // generate numbers for each input
-        for (num = 1; num <= 3; num++) {
-          if (check(grid, row, col, num)) {
-            grid[row][col] = num;
-            b = sweep2(grid);
-
-            if (b) { return true; }
-
-            grid[row][col] = 0;
-
-          }
-        }
-
-        return false;
-      }
     }
   }
 
@@ -114,23 +34,21 @@ function parseGrid(grid) {
   let num;
 
   // parse each row of the grid
-  for (row = 0; row <= 2; row++) {
+  for (row = 0; row <= 8; row++) {
     // parse each column of the grid
-    for (col = 0; col <= 2; col++) {
+    for (col = 0; col <= 8; col++) {
       // console.log('SWEEP', row, col);
       // empty string spotted
       if (!grid[row][col]) {
          // generate numbers for each input
-        for (num = 1; num <= 3; num++) {
+        for (num = 1; num <= 9; num++) {
           if (check(grid, row, col, num)) {
             grid[row][col] = num;
-            console.log(parseGrid(grid));
             if (parseGrid(grid)) { 
               return true; 
+            } else {
+              grid[row][col] = "";
             }
-
-            grid[row][col] = "";
-
           }
         }
 
@@ -160,7 +78,7 @@ function getDefaultValue() {
     // from 1 dimensional to matrix
     for (j = 0; j < holder.length; j++) {
       // Découpage toutes les 9 entrées de holder pour créer un nouveau tableau dans matrix
-      if (j % 3 === 0) {
+      if (j % 9 === 0) {
         k++;
         grid[k] = [];        
       }
@@ -197,13 +115,13 @@ function createGrid(readonly = true) {
 
   table.appendChild(tbody);
 
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i < 9; i++) {
     let tr = document.createElement('tr');
 
     tr.classList.add('grid__row');
     tbody.appendChild(tr);
 
-    for (j = 0; j < 3; j++) {    
+    for (j = 0; j < 9; j++) {    
       let input = document.createElement('input');        
       let td = document.createElement('td');
       const minAttr = document.createAttribute('min');
